@@ -55,7 +55,34 @@ async function main() {
     readline.close();
 }
 
-async function cadastrarCandidato() { }
+async function cadastrarCandidato() {
+    const numero = await question('\nDigite o número do candidato: ');
+
+    if (isNaN(numero)) {
+        console.error("\nO candidato deve receber um número. Tente novamente\n");
+        return;
+    }
+
+    const candidatoExiste = candidatos.find(function (candidato) {
+        return candidato.numero === numero;
+    });
+
+    if (candidatoExiste) {
+        console.error("\nJá existe um candidato com este número. Por favor, tente novamente com um número diferente\n");
+        return;
+    }
+
+    const nome = await question('Digite o nome do candidato: ');
+
+    const novoCandidato = { numero, nome };
+
+    candidatos.push(novoCandidato);
+
+    votos[novoCandidato.numero] = 0;
+
+    console.log(`\n${novoCandidato.nome} cadastrado com sucesso\n`);
+}
+
 
 
 async function iniciarEleicao() { }
