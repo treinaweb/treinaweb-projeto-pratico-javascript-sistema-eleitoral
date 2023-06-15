@@ -54,3 +54,8 @@ async function main() {
     } while (continuarLoop)
     readline.close();
 }
+
+async function cadastrarCandidato() { }
+
+
+async function iniciarEleicao() { }
