@@ -112,4 +112,29 @@ async function iniciarEleicao() {
 }
 
 
-function resultadoDaEleicao() { }
+function resultadoDaEleicao() {
+
+    const resultado = candidatos.map(function (candidato) {
+        return { nome: candidato.nome, numero: candidato.numero, votos: votos[candidato.numero] }
+    });
+
+    resultado.sort(function (a, b) {
+        return b.votos - a.votos;
+    });
+
+    const candidatoVencedor = resultado[0];
+
+    const totalVotos = Object.values(votos).reduce(function (previousValue, currentValue) {
+        return previousValue + currentValue;
+    }, 0);
+
+    console.log('\nResultado da eleição\n');
+    console.log(`O vencedor da eleição é: ${candidatoVencedor.nome} com ${candidatoVencedor.votos} votos`);
+    console.log(`Total de votos: ${totalVotos}`);
+    console.log("Lista de candidatos e votos");
+    resultado.forEach(function (candidato) {
+        console.log(`Nome: ${candidato.nome}, Número: ${candidato.numero}, Votos: ${candidato.votos}`);
+    });
+}
+
+main();
