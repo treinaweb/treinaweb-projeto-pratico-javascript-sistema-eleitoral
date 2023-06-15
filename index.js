@@ -85,4 +85,31 @@ async function cadastrarCandidato() {
 
 
 
-async function iniciarEleicao() { }
+
+async function iniciarEleicao() {
+    console.log("\nEleição inicializada");
+    console.log("Digite 'fim' para encerrar a eleição.");
+
+    let continuarLoop = true;
+    do {
+
+        const numero = await question('Digite o número do candidato em que deseja votar: ');
+        if (numero === 'fim') {
+            continuarLoop = false;
+            console.log("\nFinal da eleição\n");
+            resultadoDaEleicao();
+            return;
+        }
+
+
+        if (votos[numero] === undefined) {
+            console.error("\nNúmero do candidato não existente. Tente novamente\n");
+        } else {
+            votos[numero]++;
+            console.log(`Voto para o candidato com o número ${numero} confirmado!`);
+        }
+    } while (continuarLoop)
+}
+
+
+function resultadoDaEleicao() { }
